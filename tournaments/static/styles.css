@@ -47,6 +47,81 @@ body {
     ); /* Dégradé bleu vers rose */
     border-image-slice: 1;
   }
+  .match_1 {
+    background-color: #333;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    margin-top: 65px;
+    padding: 15px 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 2px solid;
+    border-image: linear-gradient(
+      to right,
+      #3682b8,
+      #ff0077
+    ); /* Dégradé bleu vers rose */
+    border-image-slice: 1;
+
+  }
+  .match_2 {
+    background-color: #333;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    margin-top: 94px;
+    padding: 15px 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 2px solid;
+    border-image: linear-gradient(
+      to right,
+      #3682b8,
+      #ff0077
+    ); /* Dégradé bleu vers rose */
+    border-image-slice: 1;
+
+  }
+  .match_3 {
+    background-color: #333;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    margin-top: 208px;
+    padding: 15px 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 2px solid;
+    border-image: linear-gradient(
+      to right,
+      #3682b8,
+      #ff0077
+    ); /* Dégradé bleu vers rose */
+    border-image-slice: 1;
+    
+  }
+  .match_4 {
+    background-color: #333;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    margin-top: 253px;
+    padding: 15px 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 2px solid;
+    border-image: linear-gradient(
+      to right,
+      #3682b8,
+      #ff0077
+    ); /* Dégradé bleu vers rose */
+    border-image-slice: 1;
+  }
   
   .match:hover {
     background-color: #ff0077;
