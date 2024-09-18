@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.accueil, name='accueil'),
-    path('inscrire/<int:tournoi_id>/', views.inscrire_joueur, name='inscrire_joueur'),
-    path('scores/<int:tournoi_id>/', views.gerer_scores, name='gerer_scores'),
-    
+    path('tournoi/<int:tournoi_id>/inscrire/', views.inscrire_joueur, name='inscrire_joueur'),
+    path('tournoi/<int:tournoi_id>/bracket/', views.tournoi_bracket, name='tournoi_bracket'),
+    path('tournoi/<int:tournoi_id>/', views.afficher_tournoi, name='afficher_tournoi'), 
 ]

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bracket - Tournoi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="static/style/styles.css">
     <style>
@@ -16,89 +17,50 @@
         }
     </style>
 </head>
-<header>
-    <div class="header-content">
-        <h1>Tournoi Mario Kart</h1>
-    </div>
-    <div class="login">
-        <a href="{% url 'admin:index' %}" class="btn btn-warning">Se Connecter</a>
-    </div>
-</header>
-
-<main>
-    <section class="bracket-section">
-        <h2>BRACKET </h2>
-        <div class="bracket">
-            <!-- Exemple de bracket -->
-            <div class="match">Match 1</div>
-            <div class="match">Match 2</div>
-            <div class="match">Match 3</div>
-            <div class="match">Match 4</div>
-        </div>
-    </section>
-
-    <section class="image-section">
-        <h2>IMAGE</h2>
-        <div class="image-placeholder">
-            <!-- Image à insérer ici -->
-            <p>Contenu visuel ici</p>
-        </div>
-    </section>
-</main>
 <body>
-    
-    <div class="bracket-section">
-        <h3>Brackets du tournoi</h3>
-        <div class="bracket">
-          <div class="round">
-            <div class="match">
-              <div class="team">Joueur 1</div>
-              <div class="team">Joueur 2</div>
-            </div>
-            <div class="match">
-              <div class="team">Joueur 3</div>
-              <div class="team">Joueur 4</div>
-            </div>
-            <div class="match">
-              <div class="team">Joueur 5</div>
-              <div class="team">Joueur 6</div>
-            </div>
-            <div class="match">
-              <div class="team">Joueur 7</div>
-              <div class="team">Joueur 8</div>
-            </div>
-          </div>
-  
-          <div class="round">
-            <div class="match_1">
-              <div class="team">Vainqueur Match 1</div>
-              <div class="team">Vainqueur Match 2</div>
-            </div>
-            <div class="match_2">
-              <div class="team">Vainqueur Match 3</div>
-              <div class="team">Vainqueur Match 4</div>
-            </div>
-          </div>
-  
-          <div class="round">
-            <div class="match_3">
-              <div class="team">Vainqueur Demi-finale 1</div>
-              <div class="team">Vainqueur Demi-finale 2</div>
-            </div>
-          </div>
-  
-          <div class="round">
-            <div class="match_4">
-              <div class="team">Champion</div>
-            </div>
-          </div>
+    <header>
+        <div class="header-content">
+            <h1>Tournoi Mario Kart</h1>
         </div>
-      </div>
+        <div class="login">
+            <a href="{% url 'admin:index' %}" class="btn btn-warning">Se Connecter</a>
+        </div>
+    </header>
 
+    <main>
+        <section class="bracket-section">
+            <h2>BRACKET</h2>
+            <div id="tournoi"></div> <!-- La div #tournoi où ton arbre sera généré par jQuery -->
+        </section>
 
+        <section class="image-section">
+            <h2>IMAGE</h2>
+            <div class="image-placeholder">
+                <!-- Image à insérer ici -->
+                <p>Contenu visuel ici</p>
+            </div>
+        </section>
+    </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.js"></script>
 
-
+    <div id="tournoi"></div>
+    <script>
+        $(function() {
+            let data = {
+                teams: [
+                    {% for joueur in joueurs %}
+                        ["{{ joueur.nom }}", ""],
+                    {% endfor %}
+                ],
+                results: []
+            };
+            $('#tournoi').bracket({
+                init: data
+            });
+        });
+    </script>
 </body>
 </html>
