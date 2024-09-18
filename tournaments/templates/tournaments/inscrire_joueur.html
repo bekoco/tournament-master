@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Joueur</title>
+</head>
+<body>
+    <h1>Inscrire un joueur au tournoi : {{ tournoi.nom }}</h1>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nom">Nom du joueur :</label>
+        <input type="text" id="nom" name="nom" required>
+        <button type="submit">Inscrire</button>
+    </form>
+</body>
+</html>

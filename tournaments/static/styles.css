@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #262626;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .bracket-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .bracket-section h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .bracket {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .round {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .match {
+    background-color: #333;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 2px solid;
+    border-image: linear-gradient(
+      to right,
+      #3682b8,
+      #ff0077
+    ); /* Dégradé bleu vers rose */
+    border-image-slice: 1;
+  }
+  
+  .match:hover {
+    background-color: #ff0077;
+    transform: scale(1.05);
+  }
+  
+  .team {
+    background-color: #444;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin: 5px 0;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .team:first-child {
+    border-bottom: 2px solid transparent; /* Suppression du simple trait rose */
+  }
+  
+  .match.winner .team:first-child {
+    background-color: #ff0077;
+    color: #fff;
+  }
+  
+  /* Création de la pyramide en ajustant les marges */
+  .round:nth-child(1) {
+    margin-right: 250px;
+  }
+  
+  .round:nth-child(2) {
+    margin-right: 150px;
+  }
+  
+  .round:nth-child(3) {
+    margin-right: 50px;
+  }
+  
+  .round:nth-child(4) {
+    margin-right: 0; /* La dernière colonne au centre */
+  }
+  
+  @media (max-width: 768px) {
+    .round {
+      margin: 0 5px;
+    }
+  
+    .match {
+      width: 150px;
+    }
+  }
