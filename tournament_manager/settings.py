@@ -119,7 +119,7 @@ STATIC_URL = '/static/'
 
 # Répertoire où Django va chercher les fichiers statiques pendant le développement
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'tournament', 'static'),  # Mets ici le chemin correct si ton dossier 'static' est ailleurs
+    os.path.join(BASE_DIR,'static'),  # Mets ici le chemin correct si ton dossier 'static' est ailleurs
 ]
 
 # Répertoire pour collecter les fichiers statiques avant la mise en production

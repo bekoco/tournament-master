@@ -29,3 +29,14 @@ class Match(models.Model):
 
     def __str__(self):
         return f"{self.participant1} vs {self.participant2} ({self.round})"
+
+    def mettre_a_jour_gagnant(self):
+        """Met à jour automatiquement le gagnant en fonction des scores."""
+        if self.score_participant1 > self.score_participant2:
+            self.gagnant = self.participant1
+        elif self.score_participant2 > self.score_participant1:
+            self.gagnant = self.participant2
+        else:
+            self.gagnant = None  # S'il y a égalité
+        self.save()
+
