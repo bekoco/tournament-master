@@ -114,11 +114,16 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
+# Chemin pour les fichiers statiques
+STATIC_URL = '/static/'
 
-STATIC_URL = 'static/'
+# Répertoire où Django va chercher les fichiers statiques pendant le développement
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'tournament', 'static'),  # Mets ici le chemin correct si ton dossier 'static' est ailleurs
+]
 
+# Répertoire pour collecter les fichiers statiques avant la mise en production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

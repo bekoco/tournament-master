@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Joueur, Tournoi
+from .models import Joueur, Tournoi, Match
 
 def inscrire_joueur(request, tournoi_id):
     tournoi = Tournoi.objects.get(id=tournoi_id)
@@ -18,19 +18,20 @@ def tournoi_bracket(request, tournoi_id):
     
     return render(request, 'tournoi_bracket.html', {'joueurs': joueurs})
 
+from django.shortcuts import render
+from .models import Tournoi, Match  # Assurez-vous d'importer Tournoi et Match
+
 def accueil(request):
-    return render(request, 'tournaments/accueil.html')
+    tournoi = Tournoi.objects.get(id=1)  # Récupère le premier tournoi ou un tournoi spécifique
+    quart_de_finale = Match.objects.filter(tournoi=tournoi, round='Quart de finale')
+    demi_finale = Match.objects.filter(tournoi=tournoi, round='Demi-finale')
+    finale = Match.objects.filter(tournoi=tournoi, round='Finale')
 
-from django.shortcuts import render, get_object_or_404
-from .models import Tournoi, Match
-
-def afficher_tournoi(request, tournoi_id):
-    tournoi = get_object_or_404(Tournoi, id=tournoi_id)
-    matchs = Match.objects.filter(participant1__tournoi=tournoi)
-    
-    return render(request, 'tournaments/tournoi_bracket.html', {
+    return render(request, 'tournaments/accueil.html', {
         'tournoi': tournoi,
-        'matchs': matchs
+        'quart_de_finale': quart_de_finale,
+        'demi_finale': demi_finale,
+        'finale': finale
     })
 
 def mettre_a_jour_gagnant(match):
@@ -42,13 +43,17 @@ def mettre_a_jour_gagnant(match):
 
 def afficher_tournoi(request, tournoi_id):
     tournoi = get_object_or_404(Tournoi, id=tournoi_id)
-    matchs = Match.objects.filter(participant1__tournoi=tournoi)
 
-    # Mettre à jour les gagnants
-    for match in matchs:
-        mettre_a_jour_gagnant(match)
+    # Récupérer les matchs en fonction du tour
+    quart_de_finale = Match.objects.filter(tour='quart', participant1__tournoi=tournoi)
+    demi_finale = Match.objects.filter(tour='demi', participant1__tournoi=tournoi)
+    finale = Match.objects.filter(tour='finale', participant1__tournoi=tournoi)
+    champion = Match.objects.filter(tour='champion', participant1__tournoi=tournoi).first()
 
-    return render(request, 'tournaments/tournoi_bracket.html', {
+    return render(request, 'tournaments/accueil.html', {
         'tournoi': tournoi,
-        'matchs': matchs
+        'quart_de_finale': quart_de_finale,
+        'demi_finale': demi_finale,
+        'finale': finale,
+        'champion': champion
     })
