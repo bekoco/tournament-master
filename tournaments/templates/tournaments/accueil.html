@@ -24,15 +24,11 @@
     <main>
         <section class="bracket-section">
             <h2>BRACKET</h2>
-            <div id="tournoi"></div> <!-- L'arbre de tournoi sera généré ici -->
+            <div id="bracket">
+                <!-- Les rounds du tournoi seront générés ici -->
+            </div>
         </section>
     </main>
-
-    <ul>
-        {% for tournoi in tournois %}
-        <li><a href="{% url 'afficher_tournoi' tournoi.id %}">{{ tournoi.nom }}</a></li>
-        {% endfor %}
-    </ul>
 
     <!-- JavaScript pour passer les données de Django vers JavaScript -->
     <script>
@@ -72,39 +68,19 @@
             {% endif %}
         ];
 
-        // Résultats des matchs
-        const resultsData = [
-            // Résultats des quarts de finale
-            [
-                {% for match in quart_de_finale %}
-                    [{{ match.score_participant1|default:0 }}, {{ match.score_participant2|default:0 }}],
-                {% endfor %}
-            ],
-            // Résultats des demi-finales
-            [
-                {% for match in demi_finale %}
-                    [{{ match.score_participant1|default:0 }}, {{ match.score_participant2|default:0 }}],
-                {% endfor %}
-            ],
-            // Résultats des finales
-            [
-                {% for match in finale %}
-                    [{{ match.score_participant1|default:0 }}, {{ match.score_participant2|default:0 }}],
-                {% endfor %}
-            ]
-        ];
-
-        // Affichage des données dans la console pour vérification
-        console.log("Teams Quart de finale:", teamsData);
-        console.log("Teams Demi-finale:", demiFinaleData);
-        console.log("Teams Finale:", finaleData);
-        console.log("Champion Data:", championData);
-        console.log("Results Data:", resultsData);
-        
         // Fonction pour générer et afficher l'arbre du tournoi
-        function generateBracket(teams, containerId) {
+        function generateBracket(roundTitle, teams, containerId) {
             const container = document.getElementById(containerId);
             if (!container) return;
+
+            // Ajouter un titre pour chaque round
+            const roundDiv = document.createElement('div');
+            roundDiv.classList.add('round');
+
+            const roundTitleDiv = document.createElement('h4');
+            roundTitleDiv.innerText = roundTitle;
+            roundTitleDiv.classList.add('round-title');
+            roundDiv.appendChild(roundTitleDiv);
 
             teams.forEach(function(match) {
                 const matchDiv = document.createElement('div');
@@ -117,16 +93,23 @@
                     matchDiv.appendChild(teamDiv);
                 });
 
-                container.appendChild(matchDiv);
+                roundDiv.appendChild(matchDiv);
             });
+
+            container.appendChild(roundDiv);
         }
 
         // Appel des fonctions pour générer l'arbre
-        generateBracket(teamsData, 'tournoi');  // Pour les quarts de finale
-        generateBracket(demiFinaleData, 'tournoi');  // Pour les demi-finales
-        generateBracket(finaleData, 'tournoi');  // Pour les finales
-        generateBracket(championData, 'tournoi');  // Pour le champion
+        const bracketContainer = document.createElement('div');
+        bracketContainer.classList.add('bracket');
+        document.getElementById('bracket').appendChild(bracketContainer);
+
+        generateBracket("Quart de finale", teamsData, 'bracket');
+        generateBracket("Demi-finale", demiFinaleData, 'bracket');
+        generateBracket("Finale", finaleData, 'bracket');
+        generateBracket("Champion", championData, 'bracket');
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
